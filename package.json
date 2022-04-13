@@ -2,7 +2,7 @@
   "name": "protocol-services-support",
   "version": "1.0.0",
   "private": false,
-  "description": "support services for protoocol staack",
+  "description": "support services for protocol stack",
   "license": "Apache-2.0",
   "type": "commonjs",
   "repository": {
@@ -29,8 +29,6 @@
     "@nestjs/platform-express": "^7.5.5",
     "@nestjs/swagger": "^4.8.0",
     "@nestjs/typeorm": "^7.1.5",
-    "@types/dockerode": "^3.2.2",
-    "aries-controller": "1.0.80",
     "cache-manager": "^3.4.1",
     "cache-manager-fs-hash": "^0.0.9",
     "cache-manager-redis-store": "^2.0.0",
@@ -47,7 +45,6 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.6",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.31",
     "typescript": "^4.2.3",
     "ws": "^7.4.6"
   },
