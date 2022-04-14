@@ -23,6 +23,8 @@ export class StatsService {
         report.reportDate = new Date().toDateString();
         report.reportingServices.push(this.getThisServiceReport());
 
+        let collection: ServiceReportDto[] = [];
+
         for(const serviceName of hosts)  {
             try {
                 // for performance it might be nice to not wait for each service
@@ -30,6 +32,7 @@ export class StatsService {
                 const details: ServiceReportDto = await this.getServiceReport(serviceName);
                 Logger.log(`query ${serviceName} returned`, details);
                 report.reportingServices.push(details);
+                collection.push(details);
             } catch(e) {
                 Logger.error(`${serviceName} failed to provide stats. ${e.message}`, e);
                 // any error indicates the service was not functional
@@ -37,6 +40,7 @@ export class StatsService {
             }
         }
 
+        Logger.log(`collection is `, collection);
         return Promise.resolve(report);
     }
 
@@ -55,8 +59,8 @@ export class StatsService {
             method: 'GET',
             url,
         };
-        const res = await this.http.requestWithRetry(req);
-        Logger.info(`${serviceName} returned `, res.data);
-        return Promise.resolve( req.data );
+        const result = await this.http.requestWithRetry(req);
+        Logger.info(`${serviceName} returned `, result.data);
+        return Promise.resolve( result.data );
     }
 }
