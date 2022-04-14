@@ -23,7 +23,6 @@ export class StatsService {
         report.reportDate = new Date().toDateString();
         report.reportingServices.push(this.getThisServiceReport());
 
-        let collection: ServiceReportDto[] = [];
 
         for(const serviceName of hosts)  {
             try {
@@ -32,15 +31,13 @@ export class StatsService {
                 const details: ServiceReportDto = await this.getServiceReport(serviceName);
                 Logger.log(`query ${serviceName} returned`, details);
                 report.reportingServices.push(details);
-                collection.push(details);
             } catch(e) {
                 Logger.error(`${serviceName} failed to provide stats. ${e.message}`, e);
                 // any error indicates the service was not functional
                 report.failedServices.push(serviceName);
             }
         }
-
-        Logger.log(`collection is `, collection);
+        
         return Promise.resolve(report);
     }
 
