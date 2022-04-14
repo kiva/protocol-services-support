@@ -19,8 +19,7 @@ export class StatsService {
 
         Logger.info(`System statistics report generated`);
 
-        let report: SummaryReportDto = new SummaryReportDto();
-
+        const report: SummaryReportDto = new SummaryReportDto();
         report.reportDate = new Date().toDateString();
         report.reportingServices.push(this.getThisServiceReport());
 
@@ -51,9 +50,6 @@ export class StatsService {
     }
 
     private async getServiceReport(serviceName: string): Promise<ServiceReportDto> {
-        // todo: make the call to
-        // http://serviceNamae/stats
-
         const url = `http://${serviceName}/stats`;
         const req: any = {
             method: 'GET',
