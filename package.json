@@ -34,7 +34,7 @@
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
-    "protocol-common": "0.1.47",
+    "protocol-common": "1.0.1",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {
