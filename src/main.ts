@@ -5,10 +5,7 @@ import { AppService } from './app/app.service';
 
 const bootstrap = async () => {
     const port = process.env.PORT;
-    // Need to disable body parser for http-proxy to work for POSTs: https://github.com/nestjs/nest/issues/405
-    const app = await NestFactory.create(AppModule, {
-        bodyParser: false,
-    });
+    const app = await NestFactory.create(AppModule);
 
     await AppService.setup(app);
     await app.listen(port);

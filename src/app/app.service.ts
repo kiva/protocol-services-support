@@ -4,6 +4,7 @@ import { DatadogLogger } from 'protocol-common/datadog.logger';
 import { Logger } from 'protocol-common/logger';
 import { traceware } from 'protocol-common/tracer';
 import { HttpConstants } from 'protocol-common/http-context/http.constants';
+import { ProtocolExceptionFilter } from 'protocol-common/protocol.exception.filter';
 
 /**
  * Sets up global functionality
@@ -13,6 +14,7 @@ import { HttpConstants } from 'protocol-common/http-context/http.constants';
 @Injectable()
 export class AppService {
 
+    private static startedAt: Date;
     /**
      * Sets up app in a way that can be used by main.ts and e2e tests
      */
@@ -21,8 +23,15 @@ export class AppService {
         const logger = new Logger(DatadogLogger.getLogger());
         app.useLogger(logger);
         app.use(traceware(process.env.SERVICE_NAME));
+        app.useGlobalFilters(new ProtocolExceptionFilter());
 
         // Increase json parse size to handle encoded images
         app.use(json({ limit: HttpConstants.JSON_LIMIT }));
+
+        AppService.startedAt = new Date();
+    }
+
+    public static getStartDate(): Date {
+        return AppService.startedAt;
     }
 }

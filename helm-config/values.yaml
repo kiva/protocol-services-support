@@ -8,15 +8,15 @@
 replicaCount: 1
 
 image:
-  repository: kivaprotocol/protocol-reporting
+  repository: kivaprotocol/protocol-services-support
   tag: latest # leave this as latest. CICD will set a specific version tag.
   pullPolicy: Always
   imagePullSecrets:
     - name: "regcred"
 
-nameOverride: "protocol-reporting"
-fullnameOverride: "protocol-reporting"
-secrets: "protocol-reporting"
+nameOverride: "protocol-services-support"
+fullnameOverride: "protocol-services-support"
+secrets: "protocol-services-support"
 
 strategy:
   type: "RollingUpdate"
