@@ -28,8 +28,8 @@ export class StatsService {
             try {
                 // for performance it might be nice to not wait for each service
                 // and let each one reply syncronously
-                const details = await this.getServiceReport(serviceName);
-                Logger.log(`query ${serviceName}`, details);
+                const details: ServiceReportDto = await this.getServiceReport(serviceName);
+                Logger.log(`query ${serviceName} returned`, details);
                 report.reportingServices.push(details);
             } catch(e) {
                 Logger.error(`${serviceName} failed to provide stats. ${e.message}`, e);
@@ -60,6 +60,7 @@ export class StatsService {
             url,
         };
         const res = await this.http.requestWithRetry(req);
+        Logger.info(`${serviceName} returned `, res.data);
         return Promise.resolve( req.data );
     }
 }

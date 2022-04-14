@@ -1,8 +1,9 @@
+import { IsArray, IsString } from 'class-validator';
 
 
 export class ServiceReportDto {
-    serviceName: string;
-    startedAt: string;
-    currentTime: string;
-    versions: string[];
+    @IsString() serviceName: string;
+    @IsString() startedAt: string;
+    @IsString() currentTime: string;
+    @IsArray() versions: string[];
 }

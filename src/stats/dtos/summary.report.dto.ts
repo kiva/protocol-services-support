@@ -1,7 +1,8 @@
 import { ServiceReportDto } from './service.report.dto';
+import { IsArray, IsString } from 'class-validator';
 
 export class SummaryReportDto {
-    reportDate: string;
-    reportingServices: ServiceReportDto[] = [];
-    failedServices: string[] = [];
+    @IsString() reportDate: string;
+    @IsArray() reportingServices: ServiceReportDto[] = [];
+    @IsArray() failedServices: string[] = [];
 }

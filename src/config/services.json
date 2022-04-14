@@ -1,5 +1,5 @@
 {
   "hosts": [
-    "protocol-aries-guardianship:3022"
+    "localhost:3010"
   ]
 }
