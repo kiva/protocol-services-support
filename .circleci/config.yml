@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            if ! npm run test:integration ; then
+            if ! npm run test ; then
               echo "Tests failed. Server logs:";
               docker-compose logs;
               exit 1;
