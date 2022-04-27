@@ -10,7 +10,6 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
-      - run: npm run test:local
 
   integration-test:
     machine:
@@ -92,7 +91,7 @@ workflows:
               ignore: /.*/
           update-description: true
           dockerfile: Dockerfile.production
-          image: kivaprotocol/protocol-reporting
+          image: kivaprotocol/protocol-system-services
           tag: << pipeline.git.tag >>,latest
       - push-to-dev:
           context:
