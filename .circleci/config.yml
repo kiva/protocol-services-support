@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            if ! npm run test:integration ; then
+            if ! npm run test ; then
               echo "Tests failed. Server logs:";
               docker-compose logs;
               exit 1;
@@ -54,7 +54,7 @@ jobs:
     parameters:
       tag:
         default: latest
-        description: Tag of protocol-reporting to push to dev
+        description: Tag of protocol-services-support to push to dev
         type: string
     steps:
       - checkout
@@ -66,7 +66,7 @@ jobs:
           version: v3.2.4
       - run:
           name: Deploy to dev cloud
-          command: helm upgrade --install protocol-reporting helm-config --set image.tag=<<parameters.tag>>
+          command: helm upgrade --install protocol-services-support helm-config --set image.tag=<<parameters.tag>>
 
 workflows:
   build-test-deploy:
@@ -92,7 +92,7 @@ workflows:
               ignore: /.*/
           update-description: true
           dockerfile: Dockerfile.production
-          image: kivaprotocol/protocol-reporting
+          image: kivaprotocol/protocol-system-services
           tag: << pipeline.git.tag >>,latest
       - push-to-dev:
           context:
