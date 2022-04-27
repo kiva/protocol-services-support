@@ -10,6 +10,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
+      - run: npm run test:local
 
   integration-test:
     machine:
@@ -53,7 +54,7 @@ jobs:
     parameters:
       tag:
         default: latest
-        description: Tag of protocol-reporting to push to dev
+        description: Tag of protocol-services-support to push to dev
         type: string
     steps:
       - checkout
@@ -65,7 +66,7 @@ jobs:
           version: v3.2.4
       - run:
           name: Deploy to dev cloud
-          command: helm upgrade --install protocol-reporting helm-config --set image.tag=<<parameters.tag>>
+          command: helm upgrade --install protocol-services-support helm-config --set image.tag=<<parameters.tag>>
 
 workflows:
   build-test-deploy:
