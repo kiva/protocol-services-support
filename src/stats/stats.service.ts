@@ -25,7 +25,6 @@ export class StatsService {
         report.reportingServices.push(this.getThisServiceReport());
 
         const hosts : any = this.getHosts();
-        Logger.warn(`got back ${JSON.stringify(hosts)}`);
         for(const serviceName of hosts)  {
             try {
                 // for performance it might be nice to not wait for each service
