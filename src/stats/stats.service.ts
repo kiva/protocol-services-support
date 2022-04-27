@@ -30,12 +30,10 @@ export class StatsService {
                 // for performance it might be nice to not wait for each service
                 // and let each one reply synchronously
                 const details: ServiceReportDto = await this.getServiceReport(serviceName);
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                Logger.log(`query ${serviceName} returned`, details);
+                Logger.log(`query ${serviceName as string} returned`, details);
                 report.reportingServices.push(details);
             } catch(e) {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                Logger.error(`${serviceName} failed to provide stats. ${e.message}`, e);
+                Logger.error(`${serviceName as string} failed to provide stats. ${e.message as string}`, e);
                 // any error indicates the service was not functional
                 report.failedServices.push(serviceName);
             }
