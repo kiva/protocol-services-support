@@ -1,5 +1,27 @@
 {
-  "hosts": [
-    "localhost:3010"
-  ]
+  "local": {
+    "hosts": [
+      "localhost:3010"
+    ]
+  },
+  "dev": {
+    "hosts": [
+      "aries-guardianship-agency:3010"
+    ]
+  },
+  "qa": {
+    "hosts": [
+      "aries-guardianship-agency:3010"
+    ]
+  },
+  "sand": {
+    "hosts": [
+      "aries-guardianship-agency:3010"
+    ]
+  },
+  "prod": {
+    "hosts": [
+      "aries-guardianship-agency:3010"
+    ]
+  }
 }
