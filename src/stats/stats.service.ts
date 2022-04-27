@@ -84,7 +84,6 @@ export class StatsService {
         };
         const result = await this.http.requestWithRetry(req);
         Logger.info(`${serviceName} returned `, result.data);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return Promise.resolve( result.data );
     }
 }
