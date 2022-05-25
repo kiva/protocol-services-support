@@ -1,5 +1,5 @@
-import { DisableAutoLogging } from 'protocol-common/disable.auto.logging.decorator';
 import { Controller, Get } from '@nestjs/common';
+import { DisableAutoLogging } from 'protocol-common';
 import { StatsService } from './stats.service.js';
 import { SummaryReportDto } from './dtos/summary.report.dto.js';
 

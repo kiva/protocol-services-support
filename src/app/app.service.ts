@@ -1,10 +1,6 @@
 import { Injectable, INestApplication } from '@nestjs/common';
 import { json } from 'body-parser';
-import { DatadogLogger } from 'protocol-common/datadog.logger';
-import { Logger } from 'protocol-common/logger';
-import { traceware } from 'protocol-common/tracer';
-import { HttpConstants } from 'protocol-common/http-context/http.constants';
-import { ProtocolExceptionFilter } from 'protocol-common/protocol.exception.filter';
+import { traceware, HttpConstants, ProtocolExceptionFilter, ProtocolLogger } from 'protocol-common';
 
 /**
  * Sets up global functionality
@@ -20,8 +16,7 @@ export class AppService {
      */
     // eslint-disable-next-line @typescript-eslint/require-await
     public static async setup(app: INestApplication): Promise<void> {
-        const logger = new Logger(DatadogLogger.getLogger());
-        app.useLogger(logger);
+        app.useLogger(app.get(ProtocolLogger));
         app.use(traceware(process.env.SERVICE_NAME));
         app.useGlobalFilters(new ProtocolExceptionFilter());
 

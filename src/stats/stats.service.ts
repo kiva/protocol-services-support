@@ -1,24 +1,19 @@
-import { HttpService, Injectable } from '@nestjs/common';
-import { Constants } from 'protocol-common/constants';
-import { ProtocolHttpService } from 'protocol-common/protocol.http.service';
-import { Logger } from 'protocol-common/logger';
+import { Injectable, Logger } from '@nestjs/common';
+import { Constants, ProtocolHttpService } from 'protocol-common';
 import { SummaryReportDto } from './dtos/summary.report.dto.js';
 import { ServiceReportDto } from './dtos/service.report.dto.js';
 import { AppService } from '../app/app.service.js';
-import servicesData from '../config/services.json';
+// @ts-ignore: assertions are currently required when importing json
+import servicesData from '../config/services.json' assert { type: 'json'};
 
 
 @Injectable()
 export class StatsService {
-    private readonly http: ProtocolHttpService;
-
-    constructor(httpService: HttpService) {
-        this.http = new ProtocolHttpService(httpService);
+    constructor(readonly http: ProtocolHttpService) {
     }
 
     public async generateReport(): Promise<SummaryReportDto> {
-
-        Logger.info('System statistics report generated');
+        Logger.log('System statistics report generated');
 
         const report: SummaryReportDto = new SummaryReportDto();
         report.reportDate = new Date().toDateString();
@@ -83,7 +78,7 @@ export class StatsService {
             url,
         };
         const result = await this.http.requestWithRetry(req);
-        Logger.info(`${serviceName} returned `, result.data);
+        Logger.log(`${serviceName} returned `, result.data);
         return Promise.resolve( result.data );
     }
 }
