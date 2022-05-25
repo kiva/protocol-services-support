@@ -4,7 +4,7 @@
   "private": false,
   "description": "support services for protocol stack",
   "license": "Apache-2.0",
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiva/protocol-services-support.git"
@@ -43,7 +43,7 @@
     "helmet": "^4.4.1",
     "http-proxy-middleware": "^1.0.6",
     "pg": "^8.5.1",
-    "protocol-common": "0.1.47",
+    "protocol-common": "1.1.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.6",
     "swagger-ui-express": "^4.1.6",

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from 'protocol-common/config.module';
-import { AppService } from './app.service';
-import { AppController } from './app.controller';
+import { AppService } from './app.service.js';
+import { AppController } from './app.controller.js';
 import data from '../config/env.json';
-import { StatsModule } from '../stats/stats.module';
+import { StatsModule } from '../stats/stats.module.js';
 
 /**
  * Initializes the Nest application

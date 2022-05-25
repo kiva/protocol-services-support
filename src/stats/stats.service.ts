@@ -2,9 +2,9 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { Constants } from 'protocol-common/constants';
 import { ProtocolHttpService } from 'protocol-common/protocol.http.service';
 import { Logger } from 'protocol-common/logger';
-import { SummaryReportDto } from './dtos/summary.report.dto';
-import { ServiceReportDto } from './dtos/service.report.dto';
-import { AppService } from '../app/app.service';
+import { SummaryReportDto } from './dtos/summary.report.dto.js';
+import { ServiceReportDto } from './dtos/service.report.dto.js';
+import { AppService } from '../app/app.service.js';
 import servicesData from '../config/services.json';
 
 
