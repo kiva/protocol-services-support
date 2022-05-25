@@ -25,7 +25,6 @@ export class StatsService {
                 // for performance it might be nice to not wait for each service
                 // and let each one reply synchronously
                 const details: ServiceReportDto = await this.getServiceReport(serviceName);
-                Logger.log(`query ${serviceName as string} returned`, details);
                 report.reportingServices.push(details);
             } catch(e) {
                 Logger.error(`${serviceName as string} failed to provide stats. ${e.message as string}`, e);

@@ -10,10 +10,13 @@
     "url": "git+https://github.com/kiva/protocol-services-support.git"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "npm run build:clean && npm run build:js && npm run build:dts && cp package.json dist/",
+    "build:clean": "rm -rf dist || true",
+    "build:dts": "dts-bundle-generator --config dts.json",
+    "build:js": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "rimraf dist && tsc && node -r dotenv/config dist/main.js",
-    "start:debug": "nodemon --legacy-watch",
+    "start": "npm run build && node -r dotenv/config --experimental-json-modules dist/app.js",
+    "start:debug": "NODE_ENV=LOCAL nodemon --legacy-watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "node -r dotenv/config node_modules/.bin/jest --runInBand  --forceExit",
