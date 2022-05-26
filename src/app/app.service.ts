@@ -1,5 +1,5 @@
 import { Injectable, INestApplication } from '@nestjs/common';
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
 import { traceware, HttpConstants, ProtocolExceptionFilter, ProtocolLogger } from 'protocol-common';
 
 /**
@@ -21,7 +21,7 @@ export class AppService {
         app.useGlobalFilters(new ProtocolExceptionFilter());
 
         // Increase json parse size to handle encoded images
-        app.use(json({ limit: HttpConstants.JSON_LIMIT }));
+        app.use(bodyParser.json({ limit: HttpConstants.JSON_LIMIT }));
 
         AppService.startedAt = new Date();
     }
