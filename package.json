@@ -37,7 +37,6 @@
     "class-validator": "^0.13.1",
     "cls-hooked": "^4.2.2",
     "dockerode": "^3.2.1",
-    "dts-bundle-generator": "^6.9.0",+
     "express-rate-limit": "^5.2.6",
     "express-request-id": "^1.4.1",
     "helmet": "^4.4.1",
