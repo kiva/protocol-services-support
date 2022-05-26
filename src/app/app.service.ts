@@ -1,6 +1,6 @@
-import { Injectable, INestApplication } from '@nestjs/common';
+import { Injectable, INestApplication, Logger } from '@nestjs/common';
 import bodyParser from 'body-parser';
-import { traceware, HttpConstants, ProtocolExceptionFilter, ProtocolLogger } from 'protocol-common';
+import { HttpConstants, ProtocolExceptionFilter, ProtocolLogger, traceware } from 'protocol-common';
 
 /**
  * Sets up global functionality
@@ -16,7 +16,8 @@ export class AppService {
      */
     // eslint-disable-next-line @typescript-eslint/require-await
     public static async setup(app: INestApplication): Promise<void> {
-        app.useLogger(app.get(ProtocolLogger));
+        const logger = new Logger(app.get(ProtocolLogger));
+        app.useLogger(logger);
         app.use(traceware(process.env.SERVICE_NAME));
         app.useGlobalFilters(new ProtocolExceptionFilter());
 
