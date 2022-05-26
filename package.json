@@ -10,18 +10,14 @@
     "url": "git+https://github.com/kiva/protocol-services-support.git"
   },
   "scripts": {
-    "build": "npm run build:clean && npm run build:js && npm run build:dts && cp package.json dist/",
-    "build:clean": "rm -rf dist || true",
-    "build:dts": "dts-bundle-generator --config dts.json",
-    "build:js": "tsc",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "start": "npm run build && node -r dotenv/config --experimental-json-modules dist/app.js",
-    "start:debug": "NODE_ENV=LOCAL nodemon --legacy-watch",
+    "build": "rm -rf dist/ && tsc && cp package.json dist/",
+    "start": "npm run build && node -r dotenv/config --experimental-json-modules dist/main.js",
+    "start:prod": "node --experimental-json-modules dist/main.js",
+    "start:debug": "nodemon --legacy-watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "node -r dotenv/config node_modules/.bin/jest --runInBand  --forceExit",
-    "test:local": "NODE_ENV=LOCAL node -r dotenv/config node_modules/.bin/jest --runInBand -- local",
-    "test:integration": "NODE_ENV=LOCAL node -r dotenv/config node_modules/.bin/jest --runInBand -- integration",
+    "test": "node -r dotenv/config --experimental-vm-modules node_modules/.bin/jest --runInBand --forceExit",
+    "test:only": "node -r dotenv/config --experimental-vm-modules node_modules/.bin/jest --runInBand  --forceExit --testNamePattern",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "typeorm:migration": "node --require ts-node/register ./node_modules/typeorm/cli.js migration:create -d src/db/migration -n"
   },
@@ -41,6 +37,7 @@
     "class-validator": "^0.13.1",
     "cls-hooked": "^4.2.2",
     "dockerode": "^3.2.1",
+    "dts-bundle-generator": "^6.9.0",+
     "express-rate-limit": "^5.2.6",
     "express-request-id": "^1.4.1",
     "helmet": "^4.4.1",
