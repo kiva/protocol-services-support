@@ -1,10 +1,6 @@
-import { Injectable, INestApplication } from '@nestjs/common';
-import { json } from 'body-parser';
-import { DatadogLogger } from 'protocol-common/datadog.logger';
-import { Logger } from 'protocol-common/logger';
-import { traceware } from 'protocol-common/tracer';
-import { HttpConstants } from 'protocol-common/http-context/http.constants';
-import { ProtocolExceptionFilter } from 'protocol-common/protocol.exception.filter';
+import { Injectable, INestApplication, Logger } from '@nestjs/common';
+import bodyParser from 'body-parser';
+import { HttpConstants, ProtocolExceptionFilter, ProtocolLogger, traceware } from 'protocol-common';
 
 /**
  * Sets up global functionality
@@ -20,13 +16,13 @@ export class AppService {
      */
     // eslint-disable-next-line @typescript-eslint/require-await
     public static async setup(app: INestApplication): Promise<void> {
-        const logger = new Logger(DatadogLogger.getLogger());
+        const logger = new Logger(app.get(ProtocolLogger));
         app.useLogger(logger);
         app.use(traceware(process.env.SERVICE_NAME));
         app.useGlobalFilters(new ProtocolExceptionFilter());
 
         // Increase json parse size to handle encoded images
-        app.use(json({ limit: HttpConstants.JSON_LIMIT }));
+        app.use(bodyParser.json({ limit: HttpConstants.JSON_LIMIT }));
 
         AppService.startedAt = new Date();
     }

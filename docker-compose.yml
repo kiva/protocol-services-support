@@ -13,7 +13,7 @@ networks:
         - subnet: 10.0.0.0/24
 
 services:
-  protocol-reporting:
+  protocol-services-support:
     build:
       context: ./
       dockerfile: Dockerfile.production

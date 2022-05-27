@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from 'protocol-common/config.module';
-import { AppService } from './app.service';
-import { AppController } from './app.controller';
-import data from '../config/env.json';
-import { StatsModule } from '../stats/stats.module';
+import { ConfigModule, ProtocolLoggerModule } from 'protocol-common';
+import { AppService } from './app.service.js';
+import { AppController } from './app.controller.js';
+import { StatsModule } from '../stats/stats.module.js';
+// @ts-ignore: assertions are currently required when importing json
+import data from '../config/env.json' assert { type: 'json'};
 
 /**
  * Initializes the Nest application
@@ -12,7 +13,8 @@ import { StatsModule } from '../stats/stats.module';
 @Module({
     imports: [
         ConfigModule.init(data),
-        StatsModule
+        StatsModule,
+        ProtocolLoggerModule
     ],
     controllers: [AppController],
     providers: [

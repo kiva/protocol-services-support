@@ -1,24 +1,19 @@
-import { HttpService, Injectable } from '@nestjs/common';
-import { Constants } from 'protocol-common/constants';
-import { ProtocolHttpService } from 'protocol-common/protocol.http.service';
-import { Logger } from 'protocol-common/logger';
-import { SummaryReportDto } from './dtos/summary.report.dto';
-import { ServiceReportDto } from './dtos/service.report.dto';
-import { AppService } from '../app/app.service';
-import servicesData from '../config/services.json';
+import { Injectable, Logger } from '@nestjs/common';
+import { Constants, ProtocolHttpService } from 'protocol-common';
+import { SummaryReportDto } from './dtos/summary.report.dto.js';
+import { ServiceReportDto } from './dtos/service.report.dto.js';
+import { AppService } from '../app/app.service.js';
+// @ts-ignore: assertions are currently required when importing json
+import servicesData from '../config/services.json' assert { type: 'json'};
 
 
 @Injectable()
 export class StatsService {
-    private readonly http: ProtocolHttpService;
-
-    constructor(httpService: HttpService) {
-        this.http = new ProtocolHttpService(httpService);
+    constructor(readonly http: ProtocolHttpService) {
     }
 
     public async generateReport(): Promise<SummaryReportDto> {
-
-        Logger.info('System statistics report generated');
+        Logger.log('System statistics report generated');
 
         const report: SummaryReportDto = new SummaryReportDto();
         report.reportDate = new Date().toDateString();
@@ -30,7 +25,6 @@ export class StatsService {
                 // for performance it might be nice to not wait for each service
                 // and let each one reply synchronously
                 const details: ServiceReportDto = await this.getServiceReport(serviceName);
-                Logger.log(`query ${serviceName as string} returned`, details);
                 report.reportingServices.push(details);
             } catch(e) {
                 Logger.error(`${serviceName as string} failed to provide stats. ${e.message as string}`, e);
@@ -83,7 +77,7 @@ export class StatsService {
             url,
         };
         const result = await this.http.requestWithRetry(req);
-        Logger.info(`${serviceName} returned `, result.data);
+        Logger.log(`${serviceName} returned `, result.data);
         return Promise.resolve( result.data );
     }
 }
