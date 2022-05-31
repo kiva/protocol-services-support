@@ -1,4 +1,4 @@
-import { Injectable, INestApplication, Logger } from '@nestjs/common';
+import { Injectable, INestApplication } from '@nestjs/common';
 import bodyParser from 'body-parser';
 import { HttpConstants, ProtocolExceptionFilter, ProtocolLogger, traceware } from 'protocol-common';
 
