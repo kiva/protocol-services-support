@@ -13,8 +13,8 @@ import data from '../config/env.json' assert { type: 'json'};
 @Module({
     imports: [
         ConfigModule.init(data),
-        StatsModule,
-        ProtocolLoggerModule
+        ProtocolLoggerModule,
+        StatsModule
     ],
     controllers: [AppController],
     providers: [
